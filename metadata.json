@@ -1,0 +1,6 @@
+{
+  "name": "RasaAceh — Kurasi Kuliner Otentik Tanah Rencong",
+  "description": "Direktori kurasi 12 kuliner lokal legendaris dan hits di Aceh mencakup Banda Aceh, Aceh Besar, Bireuen, dan Lhokseumawe.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
