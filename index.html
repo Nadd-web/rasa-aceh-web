@@ -600,8 +600,184 @@
       </div>
     </div>
 
+    <!-- Floating AI Chatbot FAB (n8n Webhook Integration) -->
+    <div id="chatWidgetRoot" class="fixed bottom-5 right-5 z-40 flex items-center gap-2.5">
+      <button
+        type="button"
+        id="chatToggleBtn"
+        aria-expanded="false"
+        aria-controls="chatPanel"
+        aria-label="Buka Asisten Kuliner RasaAceh"
+        class="group flex items-center gap-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-aceh-emerald rounded-full"
+      >
+        <span
+          class="px-3 py-1.5 rounded-full bg-aceh-terracotta group-hover:bg-aceh-terracottaHover text-white text-xs font-semibold shadow-card transition-colors duration-150 whitespace-nowrap"
+        >
+          Tanya Kuliner
+        </span>
+        <span
+          class="w-14 h-14 rounded-full bg-aceh-emerald group-hover:bg-aceh-emeraldHover group-active:scale-95 text-cream-50 flex items-center justify-center shadow-modal border border-white/15 transition-all duration-150 shrink-0"
+        >
+          <svg
+            class="w-6 h-6 text-aceh-gold"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+          </svg>
+        </span>
+      </button>
+    </div>
+
+    <!-- Floating Chatbot Window -->
+    <section
+      id="chatPanel"
+      role="dialog"
+      aria-label="Asisten Kuliner RasaAceh"
+      class="hidden fixed bottom-5 right-4 sm:right-5 z-50 w-[calc(100vw-2rem)] sm:w-[360px] h-[min(560px,calc(100vh-5rem))] flex-col bg-cream-50 border border-cream-300 rounded-2xl shadow-modal overflow-hidden animate-modal"
+    >
+      <!-- Chat Header -->
+      <div class="bg-aceh-emerald text-cream-50 px-4 py-3.5 flex items-center justify-between gap-3 shrink-0">
+        <div class="min-w-0">
+          <h2 class="font-display text-base font-bold leading-tight truncate">
+            Asisten Kuliner RasaAceh
+          </h2>
+          <div class="mt-0.5 flex items-center gap-1.5 text-xs text-cream-200/90">
+            <span
+              class="w-2 h-2 rounded-full bg-emerald-400 shrink-0"
+              aria-hidden="true"
+            ></span>
+            <span>Online</span>
+          </div>
+        </div>
+        <div class="flex items-center gap-1 shrink-0">
+          <button
+            type="button"
+            id="chatResetBtn"
+            aria-label="Mulai percakapan baru"
+            title="Mulai ulang obrolan"
+            class="w-10 h-10 rounded-lg hover:bg-white/10 text-cream-100 flex items-center justify-center transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-aceh-gold"
+          >
+            <svg
+              class="w-4 h-4"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+              <path d="M3 3v5h5" />
+            </svg>
+          </button>
+          <button
+            type="button"
+            id="chatCloseBtn"
+            aria-label="Tutup jendela obrolan"
+            class="w-10 h-10 rounded-lg hover:bg-white/10 text-cream-100 flex items-center justify-center transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-aceh-gold"
+          >
+            <svg
+              class="w-5 h-5"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M18 6 6 18" />
+              <path d="m6 6 12 12" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Messages List -->
+      <div
+        id="chatMessages"
+        aria-live="polite"
+        class="flex-1 overflow-y-auto px-4 py-4 space-y-3 bg-cream-100"
+      ></div>
+
+      <!-- Quick Reply Chips (3 Instant Suggestion Buttons) -->
+      <div
+        id="chatQuickPrompts"
+        class="px-3.5 py-2.5 bg-cream-100 border-t border-cream-200 flex items-center gap-1.5 overflow-x-auto no-scrollbar shrink-0"
+      >
+        <button
+          type="button"
+          data-chat-prompt="Rekomendasi kopi pagi"
+          class="px-3 py-1.5 min-h-[34px] rounded-lg bg-white hover:bg-cream-200 border border-cream-300 text-xs font-medium text-aceh-emerald transition-colors whitespace-nowrap shrink-0"
+        >
+          Rekomendasi kopi pagi
+        </button>
+        <button
+          type="button"
+          data-chat-prompt="Mie Aceh paling hits"
+          class="px-3 py-1.5 min-h-[34px] rounded-lg bg-white hover:bg-cream-200 border border-cream-300 text-xs font-medium text-aceh-emerald transition-colors whitespace-nowrap shrink-0"
+        >
+          Mie Aceh paling hits
+        </button>
+        <button
+          type="button"
+          data-chat-prompt="Kuliner di Bireuen"
+          class="px-3 py-1.5 min-h-[34px] rounded-lg bg-white hover:bg-cream-200 border border-cream-300 text-xs font-medium text-aceh-emerald transition-colors whitespace-nowrap shrink-0"
+        >
+          Kuliner di Bireuen
+        </button>
+      </div>
+
+      <!-- Chat Input Composer -->
+      <form
+        id="chatForm"
+        class="p-3 bg-white border-t border-cream-300 flex items-end gap-2 shrink-0"
+      >
+        <label for="chatInput" class="sr-only">Tulis pertanyaan kuliner Aceh</label>
+        <textarea
+          id="chatInput"
+          rows="1"
+          maxlength="1000"
+          placeholder="Tulis pertanyaan kuliner Aceh..."
+          class="flex-1 resize-none max-h-28 px-3.5 py-2.5 min-h-[44px] rounded-xl bg-cream-100 border border-cream-300 text-sm text-aceh-ink placeholder:text-aceh-muted/70 focus:outline-none focus:border-aceh-emerald focus:ring-2 focus:ring-aceh-emerald/15"
+        ></textarea>
+        <button
+          type="submit"
+          id="chatSendBtn"
+          aria-label="Kirim pesan"
+          class="w-11 h-11 rounded-xl bg-aceh-terracotta hover:bg-aceh-terracottaHover disabled:opacity-50 disabled:cursor-not-allowed text-white flex items-center justify-center shrink-0 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-aceh-terracotta"
+        >
+          <svg
+            class="w-4 h-4"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="m22 2-7 20-4-9-9-4Z" />
+            <path d="M22 2 11 13" />
+          </svg>
+        </button>
+      </form>
+    </section>
+
     <!-- Embedded Dataset & Vanilla JavaScript Application -->
     <script>
+      // =========================================================================
+      // KONFIGURASI WEBHOOK n8n (Ubah URL di bawah sesuai workflow n8n Anda)
+      // =========================================================================
+      const N8N_WEBHOOK_URL = 'https://nadiyamrs11.app.n8n.cloud/webhook/rasa-aceh-chat';
+
       // =========================================================================
       // 1. DATASET KURASI KULINER ACEH (12 Spot Autentik)
       // =========================================================================
@@ -1451,18 +1627,298 @@
       });
 
       document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && !detailModal.classList.contains('hidden')) {
-          closeSpotModal();
+        if (e.key === 'Escape') {
+          if (!detailModal.classList.contains('hidden')) {
+            closeSpotModal();
+          } else if (chatState.isOpen) {
+            toggleChatPanel(false);
+          }
         }
       });
 
       // =========================================================================
-      // 8. INITIAL RENDER
+      // 8. CHATBOT INTEGRASI WEBHOOK n8n
+      // =========================================================================
+      const WELCOME_BOT_MESSAGE =
+        "Assalamu'alaikum! Bingung mau cari kuliner apa di Aceh? Tanya rekomendasi kopi, mie, sate, atau tempat makan di sini ya!";
+
+      const chatToggleBtn = document.getElementById('chatToggleBtn');
+      const chatWidgetRoot = document.getElementById('chatWidgetRoot');
+      const chatPanel = document.getElementById('chatPanel');
+      const chatCloseBtn = document.getElementById('chatCloseBtn');
+      const chatResetBtn = document.getElementById('chatResetBtn');
+      const chatMessagesEl = document.getElementById('chatMessages');
+      const chatForm = document.getElementById('chatForm');
+      const chatInputEl = document.getElementById('chatInput');
+      const chatSendBtn = document.getElementById('chatSendBtn');
+      const chatQuickPromptsEl = document.getElementById('chatQuickPrompts');
+
+      const chatState = {
+        isOpen: false,
+        isLoading: false,
+      };
+
+      function isSafeWebhookUrl(rawUrl) {
+        try {
+          const parsed = new URL(String(rawUrl || '').trim());
+          const isHttps = parsed.protocol === 'https:';
+          const isLocalHttp =
+            parsed.protocol === 'http:' &&
+            (parsed.hostname === 'localhost' || parsed.hostname === '127.0.0.1');
+          return isHttps || isLocalHttp;
+        } catch {
+          return false;
+        }
+      }
+
+      function appendSafeMultilineText(container, text) {
+        const lines = String(text ?? '').split('\n');
+        lines.forEach((line, idx) => {
+          container.appendChild(document.createTextNode(line));
+          if (idx < lines.length - 1) {
+            container.appendChild(document.createElement('br'));
+          }
+        });
+      }
+
+      function findMentionedSpots(text, explicitIds) {
+        const matched = [];
+        const seen = new Set();
+
+        if (Array.isArray(explicitIds)) {
+          explicitIds.forEach((rawId) => {
+            const spot = KULINER_ACEH.find((item) => item.id === Number(rawId));
+            if (spot && !seen.has(spot.id)) {
+              seen.add(spot.id);
+              matched.push(spot);
+            }
+          });
+        }
+
+        const lower = String(text || '').toLowerCase();
+        KULINER_ACEH.forEach((spot) => {
+          if (seen.has(spot.id)) return;
+          const shortName = spot.nama_tempat.split('(')[0].trim().toLowerCase();
+          if (shortName.length >= 5 && lower.includes(shortName)) {
+            seen.add(spot.id);
+            matched.push(spot);
+          }
+        });
+
+        return matched.slice(0, 3);
+      }
+
+      function appendChatMessage(role, text, options = {}) {
+        const wrapper = document.createElement('div');
+        wrapper.className = role === 'user' ? 'flex justify-end' : 'flex flex-col items-start gap-2';
+
+        const bubble = document.createElement('div');
+        if (role === 'user') {
+          bubble.className =
+            'max-w-[85%] px-3.5 py-2.5 rounded-2xl rounded-br-sm bg-aceh-emerald text-cream-50 text-sm leading-relaxed shadow-sm';
+        } else {
+          bubble.className =
+            'max-w-[90%] px-3.5 py-2.5 rounded-2xl rounded-bl-sm bg-white border border-cream-300 text-aceh-ink text-sm leading-relaxed shadow-card';
+        }
+
+        appendSafeMultilineText(bubble, text);
+        wrapper.appendChild(bubble);
+
+        if (role === 'bot' && Array.isArray(options.spots) && options.spots.length > 0) {
+          const spotList = document.createElement('div');
+          spotList.className = 'flex flex-wrap gap-1.5 max-w-[92%]';
+          options.spots.forEach((spot) => {
+            const spotBtn = document.createElement('button');
+            spotBtn.type = 'button';
+            spotBtn.className =
+              'px-2.5 py-1.5 min-h-[34px] rounded-lg bg-cream-200 hover:bg-cream-300 border border-cream-300 text-xs font-semibold text-aceh-emerald transition-colors text-left';
+            spotBtn.textContent = `Lihat: ${spot.nama_tempat} →`;
+            spotBtn.addEventListener('click', () => openSpotModal(spot, false));
+            spotList.appendChild(spotBtn);
+          });
+          wrapper.appendChild(spotList);
+        }
+
+        chatMessagesEl.appendChild(wrapper);
+        chatMessagesEl.scrollTop = chatMessagesEl.scrollHeight;
+        return wrapper;
+      }
+
+      function appendTypingIndicator() {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'flex items-start';
+        wrapper.setAttribute('data-typing-indicator', 'true');
+
+        const bubble = document.createElement('div');
+        bubble.className =
+          'px-3.5 py-2.5 rounded-2xl rounded-bl-sm bg-white border border-cream-300 text-xs font-medium text-aceh-muted';
+        bubble.textContent = 'Sedang mengetik...';
+        wrapper.appendChild(bubble);
+
+        chatMessagesEl.appendChild(wrapper);
+        chatMessagesEl.scrollTop = chatMessagesEl.scrollHeight;
+        return wrapper;
+      }
+
+      function extractWebhookReply(data) {
+        if (typeof data === 'string') return { text: data.trim(), recommendedIds: [] };
+        if (Array.isArray(data) && data.length > 0) return extractWebhookReply(data[0]);
+        if (data && typeof data === 'object') {
+          const candidate =
+            data.reply ??
+            data.output ??
+            data.text ??
+            data.response ??
+            data.message ??
+            (data.data && (data.data.reply ?? data.data.output ?? data.data.text));
+          const recommendedIds = Array.isArray(data.recommendedIds) ? data.recommendedIds : [];
+          if (typeof candidate === 'string' && candidate.trim()) {
+            return { text: candidate.trim(), recommendedIds };
+          }
+        }
+        return { text: '', recommendedIds: [] };
+      }
+
+      async function sendMessageToN8n(teksPesan) {
+        if (!isSafeWebhookUrl(N8N_WEBHOOK_URL)) {
+          throw new Error('Konfigurasi URL webhook tidak valid.');
+        }
+
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 25000);
+
+        try {
+          const response = await fetch(N8N_WEBHOOK_URL, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              message: teksPesan,
+              timestamp: new Date().toISOString(),
+            }),
+            signal: controller.signal,
+          });
+
+          if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
+          }
+
+          const contentType = response.headers.get('content-type') || '';
+          let data;
+          if (contentType.includes('application/json')) {
+            data = await response.json();
+          } else {
+            const plainText = await response.text();
+            try {
+              data = JSON.parse(plainText);
+            } catch {
+              data = plainText;
+            }
+          }
+
+          const extracted = extractWebhookReply(data);
+          if (!extracted.text) {
+            return {
+              text: 'Maaf, asisten sudah menerima pesan Anda tetapi belum mengirimkan jawaban teks. Silakan coba kirim pertanyaan lain ya!',
+              spots: [],
+            };
+          }
+
+          return {
+            text: extracted.text,
+            spots: findMentionedSpots(extracted.text, extracted.recommendedIds),
+          };
+        } finally {
+          clearTimeout(timeoutId);
+        }
+      }
+
+      async function handleChatSubmit(rawMessage) {
+        const teksPesan = String(rawMessage || '').trim();
+        if (!teksPesan || chatState.isLoading) return;
+
+        appendChatMessage('user', teksPesan);
+        chatInputEl.value = '';
+        chatInputEl.style.height = 'auto';
+
+        chatState.isLoading = true;
+        chatSendBtn.disabled = true;
+        const typingEl = appendTypingIndicator();
+
+        try {
+          const result = await sendMessageToN8n(teksPesan);
+          typingEl.remove();
+          appendChatMessage('bot', result.text, { spots: result.spots });
+        } catch (err) {
+          typingEl.remove();
+          const isTimeout = err && err.name === 'AbortError';
+          const friendlyError = isTimeout
+            ? 'Maaf, asisten butuh waktu terlalu lama untuk merespons. Coba kirim ulang pertanyaan Anda sebentar lagi ya!'
+            : 'Maaf, Asisten Kuliner RasaAceh sedang offline atau tidak dapat terhubung saat ini. Sambil menunggu, Anda tetap bisa menjelajahi direktori atau mencoba tombol "Acak Rekomendasi" di atas!';
+          appendChatMessage('bot', friendlyError);
+        } finally {
+          chatState.isLoading = false;
+          chatSendBtn.disabled = false;
+          chatInputEl.focus();
+        }
+      }
+
+      function initChatConversation() {
+        chatMessagesEl.innerHTML = '';
+        appendChatMessage('bot', WELCOME_BOT_MESSAGE);
+      }
+
+      function toggleChatPanel(open) {
+        chatState.isOpen = typeof open === 'boolean' ? open : !chatState.isOpen;
+        chatPanel.classList.toggle('hidden', !chatState.isOpen);
+        chatPanel.classList.toggle('flex', chatState.isOpen);
+        chatWidgetRoot.classList.toggle('hidden', chatState.isOpen);
+        chatToggleBtn.setAttribute('aria-expanded', String(chatState.isOpen));
+        if (chatState.isOpen) {
+          chatInputEl.focus();
+        } else {
+          chatToggleBtn.focus();
+        }
+      }
+
+      // Chat Event Listeners
+      chatToggleBtn.addEventListener('click', () => toggleChatPanel(true));
+      chatCloseBtn.addEventListener('click', () => toggleChatPanel(false));
+      chatResetBtn.addEventListener('click', initChatConversation);
+
+      chatForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        handleChatSubmit(chatInputEl.value);
+      });
+
+      chatInputEl.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+          e.preventDefault();
+          handleChatSubmit(chatInputEl.value);
+        }
+      });
+
+      chatInputEl.addEventListener('input', () => {
+        chatInputEl.style.height = 'auto';
+        chatInputEl.style.height = Math.min(chatInputEl.scrollHeight, 112) + 'px';
+      });
+
+      chatQuickPromptsEl.addEventListener('click', (e) => {
+        const promptBtn = e.target.closest('button[data-chat-prompt]');
+        if (!promptBtn) return;
+        const promptText = promptBtn.getAttribute('data-chat-prompt') || '';
+        handleChatSubmit(promptText);
+      });
+
+      // =========================================================================
+      // 9. INITIAL RENDER
       // =========================================================================
       renderCategoryTabs();
       renderCards();
       renderRegionCards();
       renderFooterCategories();
+      initChatConversation();
     </script>
   </body>
 </html>
